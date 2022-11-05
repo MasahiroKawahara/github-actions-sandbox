@@ -17,4 +17,4 @@ jobs:
         with:
           ref: main
       - name: Git branch
-        run: git branch
+        run: git branch -a
