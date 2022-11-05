@@ -10,11 +10,11 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      # - uses: actions/checkout@v3
-      #   with:
-      #     ref: ${{ github.event.pull_request.head.sha }}
-      - run: git fetch origin
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - run: git fetch origin main:main
       - run: git branch -a
       - name: Git diff
         run: |
-          git diff HEAD origin/main -- **/*.md
+          git diff HEAD main -- **/*.md
