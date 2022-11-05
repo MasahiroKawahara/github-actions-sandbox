@@ -1,0 +1,15 @@
+name: run-textlint
+on: 
+  pull_request_target:
+    types: [ opened, reopened, synchronize ]
+    paths: [ 'contents/**/*.md' ]
+jobs:
+  run-textlint:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Switch to pull request branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
