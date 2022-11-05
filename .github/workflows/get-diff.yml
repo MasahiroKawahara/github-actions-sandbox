@@ -2,7 +2,6 @@ name: run-textlint
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-    paths: [ 'docs/**/*.md' ]
     branches: [ main ]
 
 jobs:
