@@ -1,20 +1,23 @@
-name: run-textlint
+name: CI
+
 on:
-  pull_request_target:
-    types: [ opened, reopened, synchronize ]
-    paths: [ 'docs/**/*.md' ]
-    branches: [ 'main' ]
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  run-textlint:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
+  build:
+    runs-on: ubuntu-latest  # windows-latest | macos-latest
+    name: Test changed-files
     steps:
-      - name: Switch to pull request branch
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
+
+      # Example 1
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v34
