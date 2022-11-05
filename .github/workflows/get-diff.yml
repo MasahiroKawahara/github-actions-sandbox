@@ -1,11 +1,9 @@
 name: run-textlint
-
 on:
   pull_request:
-    paths:
-      - 'docs/**/*.md'
-    branches:
-      - main
+    types: [opened, reopened, synchronize]
+    paths: [ 'docs/**/*.md' ]
+    branches: [ main ]
 
 jobs:
   run-textlint:
@@ -20,10 +18,10 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup node with cache
-          uses: actions/setup-node@v3
-          with:
-            node-version: 14
-            cache: 'npm'
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'npm'
 
       - name: Install packages via packages.json
         run: npm install
