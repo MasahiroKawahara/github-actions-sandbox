@@ -12,9 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: main
-      - uses: actions/checkout@v3
-        with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: Git branch
-        run: git branch -a
+      - name: Git diff
+        run: git diff HEAD origin/main
