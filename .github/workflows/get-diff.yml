@@ -1,7 +1,7 @@
 name: run-textlint
 on:
   pull_request:
-    paths: [ 'contents/**/*.md' ]
+    paths: [ 'docs/*.md', 'docs/**/*.md' ]
     branches: [ main ]
 
 jobs:
