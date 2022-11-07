@@ -17,6 +17,6 @@ jobs:
       - run: git branch -a
       - name: Git diff
         run: |
-          git diff --name-only HEAD main -- "docs/**.md" \
+          git diff --name-only HEAD main -- docs/**.md \
           | tr "\n" " "
           
