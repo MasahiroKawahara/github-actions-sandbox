@@ -13,8 +13,6 @@ env:
 jobs:
   run-actions:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
       - name: Switch to pull request branch
         uses: actions/checkout@v3
