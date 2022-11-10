@@ -1,22 +1,30 @@
-name: run-textlint
+name: run-some-check
 on:
   pull_request:
-    types: [opened, reopened, synchronize]
-    paths: [ 'docs/**.md' ]
+    types: [opened, synchronize, reopened]
     branches: [ main ]
+    paths: [ 'docs/**.md' ]
+env:
+  base_branch: main
+  diff_path: 'docs/**.md'
 jobs:
-  run-textlint:
+  run-some-check:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
     steps:
-      - uses: actions/checkout@v3
+      - name: Switch to pull request branch
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - run: git fetch origin main:main
-      - run: git branch -a
-      - name: Git diff
+
+      - name: Fetch base branch
+        run: git fetch origin ${base_branch}:base
+
+      - name: Run some proccesses
         run: |
-          git diff --name-only HEAD main -- docs/**.md \
-          | tr "\n" " "
-          
+          diff_files=$(git diff --name-only HEAD base -- "${diff_path}" \
+            | tr "\n" " "
+          echo "# diff_files: ${diff_files}"
+          ####
+          # run some proccesses using ${diff_files}
