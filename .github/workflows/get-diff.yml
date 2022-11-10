@@ -30,4 +30,4 @@ jobs:
             | tr "\n" " ")
           echo "# diff_files: ${diff_files}"
           ####
-          # run actions using ${diff_files}
+          # ここから先に ${diff_files} を使った処理を記載
