@@ -24,7 +24,7 @@ jobs:
       - name: Run some proccesses
         run: |
           diff_files=$(git diff --name-only HEAD base -- "${diff_path}" \
-            | tr "\n" " "
+            | tr "\n" " ")
           echo "# diff_files: ${diff_files}"
           ####
           # run some proccesses using ${diff_files}
