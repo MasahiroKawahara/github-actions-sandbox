@@ -1,4 +1,4 @@
-name: run-some-check
+name: run-some-processes
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -19,12 +19,12 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Fetch base branch
-        run: git fetch origin ${base_branch}:base
+        run: git fetch origin ${base_branch}:${base_branch}
 
-      - name: Run some proccesses
+      - name: Run some processes using diff_files
         run: |
-          diff_files=$(git diff --name-only HEAD base -- "${diff_path}" \
+          diff_files=$(git diff --name-only HEAD ${base_branch} -- "${diff_path}" \
             | tr "\n" " ")
           echo "# diff_files: ${diff_files}"
           ####
-          # run some proccesses using ${diff_files}
+          # run some processes using ${diff_files}
