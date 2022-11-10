@@ -19,6 +19,14 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Install textlint
+        run: npm install textlint textlint-rule-no-dropping-the-ra
+
       - name: Fetch base branch
         run: git fetch origin ${base_branch}:${base_branch}
 
@@ -29,3 +37,4 @@ jobs:
           echo "# diff_files: ${diff_files}"
           ####
           # ここから先に ${diff_files} を使った処理を記載
+          npx textlint ${diff_files} --rule textlint-rule-no-dropping-the-ra
