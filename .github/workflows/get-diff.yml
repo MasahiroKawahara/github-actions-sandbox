@@ -11,7 +11,7 @@ env:
   diff_path: 'docs/**.md'
 
 jobs:
-  run-some-check:
+  run-actions:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
